@@ -2,34 +2,49 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
-
+const users={
+    template:`
+    <div>
+        <h2>Users</h2>
+        <router-view></router-view>
+    </div>
+    `
+}
+const user={
+    template:`
+    <div>
+        {{$route.params.username}}-{{$route.query.aaa}}
+    </div>
+    `
+}
+const Home={template:'<div><h2>HOME</h2></div>'}
 
 const router = new VueRouter({
     mode: 'history',
     base: __dirname,
     routes: [
-        { path: '/' },
-        { path: '/params/:aaa/:bbb' },
-        { path: '/parame-regex/:id(\\d+)' },//正则表达式:包含至少一个数字
+        { path: '/',name:'Home',component:Home},
+        {path:'/users',component:users,
+            children:[
+                {path:':username',name:'user',component:user}
+            ]//数组
+        }
     ]
 })
 
 new Vue({
     router,
     template: `
-    <div>
-        <h1>Good Morning</h1>
-        <ul>
+    <div id='r'> 
+        <h1>导航</h1>
+        <ol>
             <li><router-link to="/">/</router-link></li>
-            <li><router-link to="/params/111/222">/params/111/222</router-link></li>
-            <li><router-link to="/parame-regex/222">/parame-regex/222</router-link></li>
-        </ul>
-        <p>Show</p>
-        <pre>
-            <code>
-                {{JSON.stringify($route,null,2)}}
-            </code>
-         </pre>
+            <li><router-link to="/first">first</router-link></li>
+            <ol>
+                <li><router-link :to="{path:'/users/wossss',query:{aaa:'bbb'}}">wos</router-link></li>
+            </ol>
+        </ol>
+        <router-view></router-view>
     </div>
     `
 }).$mount('#app')
