@@ -28,12 +28,12 @@ const router = new VueRouter({
             children: [
                 { path: '/', component: first },//默认
                 { path: 'first', component: firstFirst},
-                { path: 'second', component: firstSecond },
+                { path: 'second', component: firstSecond},
                 { path: 'third', redirect:'first'},
             ]
         },
 
-        { path: '/second', component: second },
+        { path: '/second', component: second ,alias:'/gogo'},//alias别名,gogo显示second内容
         { path: '/aaa/:id', component: firstFirst },
         { path: '/bbb/:id', redirect: '/aaa/:id' },//重定向绑定
         {
@@ -64,6 +64,7 @@ new Vue({
             <li><router-link to="/first/third">子333</router-link></li>
         </ol>
         <li><router-link to="/second">second</router-link></li>
+        <li><router-link to="/gogo">gogo</router-link></li>
         <li><router-link to="/aaa/123">aaa</router-link></li>
         <li><router-link to="/bbb/456">bbb</router-link></li>
         <li><router-link to="/ccc/001">ccc</router-link></li>
