@@ -1,10 +1,12 @@
 import Vue from 'vue'
-import Router from './Router'
-// import App from './App.vue'
+//import Router from './Router'
+import transition from './transition.vue'
 
-// new Vue({
-//     el: '#app',
-//     //   render: h => h(App)
-//     template: "<App/>",
-//     components: { App },
-// })
+new Vue({
+    el: '#demo',
+    // data: {
+    //     show: true
+    // }
+    render:xx=>xx(transition)
+})
+
