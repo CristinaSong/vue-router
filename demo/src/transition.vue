@@ -3,6 +3,8 @@
   <button v-on:click="show = !show">
     Toggle
   </button>
+  <!-- 自定义指令 -->
+  <input v-focus>
   <transition name="fade">
     <p v-if="show">hello</p>
   </transition>
@@ -15,6 +17,14 @@ export default {
     data(){
         return{
             show:true,
+        }
+    },
+    directives: {
+        focus: {
+            // 指令的定义
+            inserted: function (el) {
+            el.focus()
+            }
         }
     }
 
