@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Parent from './transition.vue'//一定要加./
 Vue.use(VueRouter)
 
 const Home = {
@@ -10,22 +11,6 @@ const Home = {
         </div>
     `
 }
-const Parent = {
-    template: `
-        <div>
-            <h2>Parent</h2>
-            <p>This is Parent></p>
-        </div>
-    `
-}
-const Page404 = {
-    template: `
-        <div>
-            <h2>Page404</h2>
-            <p>Error:404></p>
-        </div>
-    `
-}
 
 const router = new VueRouter({
     mode: 'history',
@@ -33,7 +18,6 @@ const router = new VueRouter({
     routes: [
         { path: '/', component: Home },
         { path: '/Parent', component: Parent },
-        {path:'*',component:Page404}//path *
     ]
 })
 
@@ -53,22 +37,10 @@ new Vue({
         <ul>
             <li><router-link to='/'>Home</router-link></li>
             <li><router-link to='/Parent'>Parent</router-link></li>
-            <li><router-link to='/Page404'>Page404</router-link></li>
         </ul>
         <transition :name="aaa" mode="out-in">
         <router-view></router-view>
         </transition>
     </div>
-    `,
-    watch: {
-        '$route'(to, from) {
-            console.log(to);
-            console.log(from);
-            if (from.path == '/Parent') {
-                this.aaa = 'fade1';
-            } else {
-                this.aaa = 'fade2';
-            }
-        }
-    }
+    `
 }).$mount("#app")
