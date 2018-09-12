@@ -11,11 +11,18 @@
       /* li.router-link-active a{
           color: blue;
       } */
-    .fade-enter-active, .fade-leave-active {
+    .fade1-enter-active, .fade1-leave-active {
     transition: opacity .5s;
     }
-    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    .fade1-enter, .fade1-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
+    }
+    .fade2-enter-active, .fade2-leave-active {
+    transition: background .5s ease-in,color 0.3s ease-out;
+    }
+    .fade2-enter, .fade2-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        background-color:#f6f6f6;
+        color:red;
     }
   </style>
   <body>
