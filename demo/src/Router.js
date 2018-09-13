@@ -7,7 +7,7 @@ const Home = {
     template: `
         <div>
             <h2>Home</h2>
-            <p>This is Home></p>
+            <p>This is Home-{{$route.query.a}}</p>
         </div>
     `
 }
@@ -15,7 +15,7 @@ const Page404 = {
     template: `
         <div>
             <h2>Page404</h2>
-            <p>Error:404></p>
+            <p>Error:404</p>
         </div>
     `,
     //路由里的钩子
@@ -44,7 +44,7 @@ const router = new VueRouter({
                 next({path:'/qqwfwf'});//改变路由路径
             }
         },
-        {path:'*',component:Page404}//path *
+        {path:'*',component:Page404}//path *,一定要放在路由的最后面
     ]
 })
 
@@ -60,6 +60,10 @@ new Vue({
     },
     template: `
     <div id="app">
+        <button v-on:click="houtui">后退</button>
+        <button v-on:click="qianjin">前进</button>
+        <button v-on:click="home">返回首页</button>
+        <button v-on:click="query">query</button>
         <h1>This is Transition</h1>
         <ul>
             <li><router-link to='/'>Home</router-link></li>
@@ -70,5 +74,19 @@ new Vue({
         <router-view></router-view>
         </transition>
     </div>
-    `
+    `,
+    methods:{
+        houtui:function(){
+            router.go(-1);
+        },
+            qianjin:function(){
+            router.go(1);
+        },
+        home:function(){
+            router.push("/");
+        },
+        query:function(){
+            router.push({path:"/",query:{a:1,b:2}});
+        }
+    }
 }).$mount("#app")
